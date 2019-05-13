@@ -12,6 +12,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        factory(App\Student::class, 100)->create();
+        //factory(App\Student::class, 100)->create();
+
+        // DB::table('categories')->insert([
+        //     'name' => str_random(10),
+        // ]);
+        $this->call([
+            CategorySeeder::class,
+        ]);
     }
 }

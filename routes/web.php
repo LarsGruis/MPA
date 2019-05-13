@@ -18,3 +18,4 @@ Route::get('/', function () {
 Route::resource('test', 'TestController');
 Route::resource('students', 'StudentController');
 Route::resource('shares', 'ShareController');
+Route::resource('categories', 'CategoriesController');

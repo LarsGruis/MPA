@@ -40,12 +40,20 @@ class ShareController extends Controller
         $request->validate([
             'share_name'=>'required',
             'share_price'=> 'required|integer',
-            'share_qty' => 'required|integer'
+            'share_qty' => 'required|integer',
+            'product_photo' => 'required'
         ]);
+
+        $image = $request->file('product_photo');
+        $new_name = rand() . '.png';
+
+        $image->move(public_path("images"), $new_name);
+
         $share = new Share([
             'share_name' => $request->get('share_name'),
             'share_price'=> $request->get('share_price'),
-            'share_qty'=> $request->get('share_qty')
+            'share_qty'=> $request->get('share_qty'),
+            'product_photo'=> $new_name
         ]);
         $share->save();
         return redirect('/shares')->with('success', 'Stock has been added');
@@ -94,6 +102,7 @@ class ShareController extends Controller
         $share->share_name = $request->get('share_name');
         $share->share_price = $request->get('share_price');
         $share->share_qty = $request->get('share_qty');
+        $share->product_photo = $request->get('product_photo');
         $share->save();
 
         return redirect('/shares')->with('success', 'Stock has been updated');
@@ -112,4 +121,15 @@ class ShareController extends Controller
 
      return redirect('/shares')->with('success', 'Stock has been deleted Successfully');
     }
+
+    // function upload(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'select_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+    //     ]);
+    //     $image = $request->file('select_file');
+    //     $new_name = $random() . '.' . $image-> getClientOriginalExtension();
+    //     $image->move(public_path("images"), $new_name);
+    //     return back()->with('success', 'Image Uploaded Successfully')->with('path', $new_name);
+    // }
 }

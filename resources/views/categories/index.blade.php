@@ -87,19 +87,11 @@
       {{ session()->get('success') }}  
     </div><br />
   @endif
-        <a href="{{ route('shares.create')}}" class="btn btn-success" style="margin-bottom: 40px; width: 100%">Create</a>
-        @foreach($shares as $share)
+        @foreach($categories as $category)
         <div class="card">
-          <img src="{{asset('images/1073499532.png')}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">{{$share->share_name}}</h5>
-              <p class="card-text">€{{$share->share_price}}</p>
-              <a href="{{ route('shares.edit',$share->id)}}" class="btn btn-primary">Edit</a>
-              <form action="{{ route('shares.destroy', $share->id)}}" method="post" style="display: inline;">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit" style="float: right;">Delete</button>
-            </form>
+              <h5 class="card-title">{{$category->name}}</h5>
+              <a href="{{ route('shares.index',$share->id)}}" class="btn btn-primary">Producten</a>
             </div>
         </div>
         @endforeach

@@ -4,8 +4,32 @@
 <style>
   .uper {
     margin-top: 40px;
+    max-width: 1140px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 40px;
+  }
+  
+  .container {
+    max-width: 100%;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .navbar-brand {
+    margin: 0 auto;
+    font-size: 30px;
   }
 </style>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand text-light" href="shares">Webshop</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
 <div class="card uper">
   <div class="card-header">
     Add Share
@@ -20,7 +44,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('shares.store') }}">
+      <form method="post" enctype="multipart/form-data" action="{{ route('shares.store') }}">
           <div class="form-group">
               @csrf
               <label for="name">Share Name:</label>
@@ -33,6 +57,10 @@
           <div class="form-group">
               <label for="quantity">Share Quantity:</label>
               <input type="text" class="form-control" name="share_qty"/>
+          </div>
+          <div class="form-group">
+              <label for="photo">Product photo:</label>
+              <input type="file" class="form-control" name="product_photo"/>
           </div>
           <button type="submit" class="btn btn-primary">Add</button>
       </form>
