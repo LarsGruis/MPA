@@ -68,7 +68,7 @@ class ShareController extends Controller
             //'product_photo'=> $new_name
         ]);
         $share->save();
-        return redirect('/shares')->with('success', 'Stock has been added');
+        return redirect('/categories')->with('success', 'Product has been added');
     }
 
     /**

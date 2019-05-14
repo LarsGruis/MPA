@@ -20,8 +20,8 @@
   }
 
   .navbar-brand {
-    margin: 0 auto;
     font-size: 30px;
+    margin-right: 0;
   }
 
   .card {
@@ -76,7 +76,8 @@
   }*/
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  <a class="navbar-brand text-light" href="categories">Webshop</a>
+  <a class="navbar-brand text-light" href="categories" style="font-size: 17px;">Webshop |</a>
+  <a class="navbar-brand text-light justify-content-end" href="shares" style="font-size: 17px;>&nbsp;All products</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
