@@ -32,7 +32,7 @@
 </nav>
 <div class="card uper">
   <div class="card-header">
-    Add Product
+    Add Category
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -44,27 +44,15 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" enctype="multipart/form-data" action="{{ route('shares.store') }}">
+      <form method="post" enctype="multipart/form-data" action="{{ route('categories.store') }}">
           <div class="form-group">
               @csrf
-              <label for="name">Product Name:</label>
-              <input type="text" class="form-control" name="share_name"/>
-          </div>
-          <div class="form-group">
-              <label for="price">Product Price :</label>
-              <input type="text" class="form-control" name="share_price"/>
-          </div>
-          <div class="form-group">
-              <label for="quantity">Product Quantity:</label>
-              <input type="text" class="form-control" name="share_qty"/>
+              <label for="name">Category Name:</label>
+              <input type="text" class="form-control" name="name"/>
           </div>
           <div class="form-group">
               <label for="quantity">Category id:</label>
-              <input type="number" class="form-control" name="category_id"/>
-          </div>
-          <div class="form-group">
-              <label for="photo">Product photo:</label>
-              <input type="file" class="form-control" name="product_photo"/>
+              <input type="number" class="form-control" name="id"/>
           </div>
           <button type="submit" class="btn btn-primary">Add</button>
       </form>

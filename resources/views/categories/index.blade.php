@@ -11,6 +11,12 @@
     margin-left: auto;
     margin-bottom: 40px;
   }
+
+  .card-title {
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
   
   .container {
     max-width: 100%;
@@ -52,7 +58,7 @@
 
 
   .btn-primary {
-    width: 49%;
+    width: 100%;
     float: left;
     margin-bottom: 20px;
   }
@@ -87,11 +93,12 @@
       {{ session()->get('success') }}  
     </div><br />
   @endif
+  <a href="{{ route('categories.create')}}" class="btn btn-success" style="margin-bottom: 40px; width: 100%">Create category</a>
         @foreach($categories as $category)
         <div class="card">
             <div class="card-body">
               <h5 class="card-title">{{$category->name}}</h5>
-              <a href="{{ route('shares.index',$share->id)}}" class="btn btn-primary">Producten</a>
+              <a href="{{ url('shares?category=' . $category->id)}}" class="btn btn-primary">Producten</a>
             </div>
         </div>
         @endforeach

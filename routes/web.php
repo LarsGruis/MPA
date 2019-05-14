@@ -19,3 +19,5 @@ Route::resource('test', 'TestController');
 Route::resource('students', 'StudentController');
 Route::resource('shares', 'ShareController');
 Route::resource('categories', 'CategoriesController');
+Route::view('/upload', "upload");
+Route::post('/store', "ShareController@store");

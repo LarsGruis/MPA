@@ -76,7 +76,7 @@
   }*/
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  <a class="navbar-brand text-light" href="shares">Webshop</a>
+  <a class="navbar-brand text-light" href="categories">Webshop</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -90,7 +90,7 @@
         <a href="{{ route('shares.create')}}" class="btn btn-success" style="margin-bottom: 40px; width: 100%">Create</a>
         @foreach($shares as $share)
         <div class="card">
-          <img src="{{asset('images/1073499532.png')}}" class="card-img-top" alt="...">
+          <img src="{{$share->product_photo}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{$share->share_name}}</h5>
               <p class="card-text">€{{$share->share_price}}</p>

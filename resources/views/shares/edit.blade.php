@@ -32,7 +32,7 @@
 </nav>
 <div class="card uper">
   <div class="card-header">
-    Edit Share
+    Edit Product
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -48,16 +48,20 @@
         @method('PATCH')
         @csrf
         <div class="form-group">
-          <label for="name">Share Name:</label>
+          <label for="name">Product Name:</label>
           <input type="text" class="form-control" name="share_name" value={{ $share->share_name }} />
         </div>
         <div class="form-group">
-          <label for="price">Share Price :</label>
+          <label for="price">Product Price :</label>
           <input type="text" class="form-control" name="share_price" value={{ $share->share_price }} />
         </div>
         <div class="form-group">
-          <label for="quantity">Share Quantity:</label>
+          <label for="quantity">Product Quantity:</label>
           <input type="text" class="form-control" name="share_qty" value={{ $share->share_qty }} />
+        </div>
+        <div class="form-group">
+              <label for="quantity">Category id:</label>
+              <input type="number" class="form-control" name="category_id"/>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
       </form>

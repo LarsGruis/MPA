@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Share;
+use App\Categories;
 use Illuminate\Http\Request;
+use DB;
 
 class ShareController extends Controller
 {
@@ -12,11 +14,16 @@ class ShareController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $shares = Share::all();
+        $id = $request->get('category');
 
-        return view('shares.index', compact('shares'));
+        $shares = Share::all();
+        if ($id !== null) {
+            $shares = DB::table('shares')->where('category_id', $id)->get();
+        }
+
+        return view('shares.index', ['shares' => $shares]);
     }
 
     /**
@@ -41,19 +48,24 @@ class ShareController extends Controller
             'share_name'=>'required',
             'share_price'=> 'required|integer',
             'share_qty' => 'required|integer',
+            'category_id' => 'required|integer',
             'product_photo' => 'required'
         ]);
 
-        $image = $request->file('product_photo');
-        $new_name = rand() . '.png';
+        // $image = $request->file('product_photo');
+        // $new_name = rand() . '.png';
 
-        $image->move(public_path("images"), $new_name);
+        // $image->move(public_path("images"), $new_name);
+
+        $path = $request->file('product_photo')->store('upload');
+        echo $path;
 
         $share = new Share([
             'share_name' => $request->get('share_name'),
             'share_price'=> $request->get('share_price'),
             'share_qty'=> $request->get('share_qty'),
-            'product_photo'=> $new_name
+            'category_id'=> $request->get('category_id'),
+            //'product_photo'=> $new_name
         ]);
         $share->save();
         return redirect('/shares')->with('success', 'Stock has been added');
@@ -95,6 +107,7 @@ class ShareController extends Controller
         $request->validate([
             'share_name'=>'required',
             'share_price'=> 'required|integer',
+            'category_id'=> 'required|integer',
             'share_qty' => 'required|integer'
         ]);
 
@@ -102,6 +115,7 @@ class ShareController extends Controller
         $share->share_name = $request->get('share_name');
         $share->share_price = $request->get('share_price');
         $share->share_qty = $request->get('share_qty');
+        $share->category_id = $request->get('category_id');
         $share->product_photo = $request->get('product_photo');
         $share->save();
 
