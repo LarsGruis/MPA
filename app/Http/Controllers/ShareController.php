@@ -52,20 +52,17 @@ class ShareController extends Controller
             'product_photo' => 'required'
         ]);
 
-        // $image = $request->file('product_photo');
-        // $new_name = rand() . '.png';
+        $image = $request->file('product_photo');
+        $new_name = rand() . '.png';
 
-        // $image->move(public_path("images"), $new_name);
-
-        $path = $request->file('product_photo')->store('upload');
-        echo $path;
+        $image->move(public_path("images"), $new_name);
 
         $share = new Share([
             'share_name' => $request->get('share_name'),
             'share_price'=> $request->get('share_price'),
             'share_qty'=> $request->get('share_qty'),
             'category_id'=> $request->get('category_id'),
-            //'product_photo'=> $new_name
+            'product_photo'=> $new_name
         ]);
         $share->save();
         return redirect('/categories')->with('success', 'Product has been added');

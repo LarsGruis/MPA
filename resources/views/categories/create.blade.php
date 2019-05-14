@@ -47,7 +47,7 @@
       <form method="post" enctype="multipart/form-data" action="{{ route('categories.store') }}">
           <div class="form-group">
               @csrf
-              <label for="name">Category Name:</label>
+              <label for="name">Cateogory Name:</label>
               <input type="text" class="form-control" name="name"/>
           </div>
           <div class="form-group">

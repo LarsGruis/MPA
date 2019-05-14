@@ -36,12 +36,14 @@
     }
   }
 
-  .card-img-top {
-    width: 50%; 
+  .card-img-top { 
     display: block; 
     margin: 0 auto; 
     padding-top: 25px; 
     padding-bottom: 5px;
+    height: 300px;
+    width: auto;
+    overflow: hidden;
   }
 
   @media(max-width: 1115px) {
@@ -77,7 +79,7 @@
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <a class="navbar-brand text-light" href="categories" style="font-size: 17px;">Webshop |</a>
-  <a class="navbar-brand text-light justify-content-end" href="shares" style="font-size: 17px;>&nbsp;All products</a>
+  <a class="navbar-brand text-light justify-content-end" href="shares" style="font-size: 17px;">&nbsp;All products</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -91,7 +93,7 @@
         <a href="{{ route('shares.create')}}" class="btn btn-success" style="margin-bottom: 40px; width: 100%">Create</a>
         @foreach($shares as $share)
         <div class="card">
-          <img src="{{$share->product_photo}}" class="card-img-top" alt="...">
+          <img src="{{asset('images/'.$share->product_photo)}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{$share->share_name}}</h5>
               <p class="card-text">€{{$share->share_price}}</p>
