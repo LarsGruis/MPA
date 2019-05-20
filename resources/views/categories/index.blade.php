@@ -12,6 +12,11 @@
     margin-bottom: 40px;
   }
 
+  .navbar {
+    display: block !important;
+  }
+
+
   .card-title {
     text-align: center;
     padding-top: 25px;
@@ -84,6 +89,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <a class="navbar-brand text-light" href="categories" style="font-size: 17px;">Webshop |</a>
   <a class="navbar-brand text-light justify-content-end" href="shares" style="font-size: 17px;">&nbsp;All products</a>
+  <i class="fas fa-shopping-cart text-light" style="float: right; line-height: 35px;"></i>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

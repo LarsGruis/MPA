@@ -66,6 +66,10 @@
               <label for="photo">Product photo:</label>
               <input type="file" class="form-control" name="product_photo"/>
           </div>
+          <div class="form-group">
+              <label for="quantity">Product Details:</label>
+              <input type="text" class="form-control" name="product_detail" />
+          </div>
           <button type="submit" class="btn btn-primary">Add</button>
       </form>
   </div>

@@ -11,6 +11,7 @@ class Share extends Model
     'share_price',
     'share_qty',
     'category_id',
-    'product_photo'
+    'product_photo', 
+    'product_detail'
   ];
 }

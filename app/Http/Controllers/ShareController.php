@@ -6,6 +6,8 @@ use App\Share;
 use App\Categories;
 use Illuminate\Http\Request;
 use DB;
+use Session;
+use App\Cart;
 
 class ShareController extends Controller
 {
@@ -49,7 +51,8 @@ class ShareController extends Controller
             'share_price'=> 'required|integer',
             'share_qty' => 'required|integer',
             'category_id' => 'required|integer',
-            'product_photo' => 'required'
+            'product_photo' => 'required', 
+            'product_detail' => 'required'
         ]);
 
         $image = $request->file('product_photo');
@@ -62,7 +65,8 @@ class ShareController extends Controller
             'share_price'=> $request->get('share_price'),
             'share_qty'=> $request->get('share_qty'),
             'category_id'=> $request->get('category_id'),
-            'product_photo'=> $new_name
+            'product_photo'=> $new_name, 
+            'product_detail'=> $request->get('product_detail'),
         ]);
         $share->save();
         return redirect('/categories')->with('success', 'Product has been added');
@@ -131,6 +135,38 @@ class ShareController extends Controller
      $share->delete();
 
      return redirect('/shares')->with('success', 'Stock has been deleted Successfully');
+    }
+
+    public function getDetails(Request $request, Share $share)
+    {
+        $id = $request->get('product_detail');
+
+        // dd($share);
+       
+
+        return view('shares.detail', ['share' => $share]);
+    } 
+
+    public function getAddToCart(Request $request, $id) 
+    {
+        $share = Share::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($share, $share->$id);
+
+        $request->session()->put('cart', $cart);
+        return redirect()->route('shares.index');
+    }
+
+    public function getCart(Request $request)
+    {
+        if (!Session::has('cart'))
+        {
+            return view('shop.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('shop.shopping-cart', ['shares' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
     // function upload(Request $request)
