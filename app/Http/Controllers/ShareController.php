@@ -152,7 +152,7 @@ class ShareController extends Controller
         $share = Share::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        $cart->add($share, $share->$id);
+        $cart->add($share, $share->id);
 
         $request->session()->put('cart', $cart);
         return redirect()->route('shares.index');
@@ -162,11 +162,19 @@ class ShareController extends Controller
     {
         if (!Session::has('cart'))
         {
-            return view('shop.shopping-cart');
+            return view('shop.shopping-cart', ['shares' => null]);
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         return view('shop.shopping-cart', ['shares' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
+    public function deleteCart()
+    {
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $cart->delete();
+        return redirect('/shares');
     }
 
     // function upload(Request $request)

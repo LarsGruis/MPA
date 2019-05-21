@@ -30,3 +30,9 @@ Route::get('/shopping-cart', [
 	'uses' => 'ShareController@getCart', 
 	'as' => 'shares.shoppingCart'
 ]);
+
+Route::get('/delete-cart', ['uses' => 'ShareController@deleteCart', 'as' => 'shares.deleteCart']);
+
+// Route::get('shares', [ 'as' => 'shares.deleteCart', 'uses' => 'ShareController@deleteCart']);
+// Route::get('/shopping-cart', 'ShareController@deleteCart')->name('deleteCart');
+// Route::get('user/profile', 'UserProfileController@show')->name('profile');

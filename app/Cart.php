@@ -1,10 +1,11 @@
 <?php
 
 namespace App;
+use Session;
 
 class Cart
 {
-	public $items;
+	public $items = null;
 	public $totalQty = 0;
 	public $totalPrice = 0;
 
@@ -20,7 +21,7 @@ class Cart
 
 	public function add($item, $id)
 	{
-		$storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
+		$storedItem = ['qty' => 0, 'share_price' => $item->share_price, 'item' => $item];
 		if ($this->items) {
 			if (array_key_exists($id, $this->items)) 
 			{
@@ -28,9 +29,14 @@ class Cart
 			}
 		}
 		$storedItem['qty']++;
-		$storedItem['price'] = $item->price * $storedItem['qty'];
+		$storedItem['share_price'] = $item->share_price * $storedItem['qty'];
 		$this->items[$id] = $storedItem;
 		$this->totalQty++;
-		$this->totalPrice += $item->price;
+		$this->totalPrice += $item->share_price;
+	}
+
+	public function delete()
+	{
+		Session::flush();
 	}
 }

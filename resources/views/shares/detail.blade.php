@@ -28,53 +28,21 @@
     margin-right: 0;
   }
 
-  .card {
-    width: calc(25% - (4px * 3) / 4); 
-    display: inline-block; 
-    margin-bottom: 4px;
-  }
-
-  @media(max-width: 767px) {
-    .card {
-      width: 100%;
-    }
-  }
-
   .card-img-top { 
-    display: block; 
-    margin: 0 auto; 
-    padding-top: 25px; 
     padding-bottom: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 25px;
     height: 300px;
     width: auto;
     overflow: hidden;
-  }
-
-  @media(max-width: 1115px) {
-    .btn-primary {
-      width: 100% !important;
-    }
-  }
-
-
-  .btn-primary {
-    width: 49%;
     float: left;
-    margin-bottom: 20px;
   }
 
-  .btn-danger {
-      width: 49%;
-      float: right;
-      margin-bottom: 20px;
+  .product_detail {
+    float: left;
+    padding-top: 35px;
   }
-
-  @media(max-width: 1115px) {
-    .btn-danger {
-      width: 100%;
-    }
-  }
-
 
   /*ul {
     padding-left: 540px;
@@ -88,9 +56,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
   </button>
-</nav>
-<div class="uper">
-       
-          <p>{{$share->product_detail}}</p>
-<div>
+</nav>          
+  <img src="{{asset('images/'.$share->product_photo)}}" class="card-img-top" alt="...">
+  <p class="product_detail">{{$share->product_detail}}</p>
 @endsection

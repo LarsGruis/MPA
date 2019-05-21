@@ -69,6 +69,14 @@
     width: 100%;
   }
 
+  .btn-danger {
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    float: none;
+    width: 100%;
+  }
+
   @media(max-width: 1115px) {
     .btn-success {
       width: 100%;
@@ -81,6 +89,10 @@
 
   .dropdown-toggle {
     margin-bottom: 0;
+  }
+
+  .list-group-item {
+      line-height: 35px;
   }
 
   /*ul {
@@ -107,8 +119,8 @@
           @foreach($shares as $share)
               <li class="list-group-item">
                 <span class="badge">{{ $share['qty'] }}</span>
-                <strong>{{ $share['item']['title'] }}</strong>
-                <span class="label label-success">{{ $share['price'] }}</span>
+                <strong>{{ $share['item']['share_name'] }}</strong>
+                <span class="label label-success">€{{ $share['item']['share_price'] }}</span>
                 <div class="btn-group">
                   <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
                   <ul class="dropdown-menu">
@@ -130,6 +142,11 @@
   <div class="row">
       <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="margin: 0 auto;">
           <button type="button" class="btn btn-success">Checkout</button>
+      </div>
+  </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="margin: 0 auto;">
+          <button type="button" class="btn btn-danger" href="{{ route('shares.deleteCart') }}">Verwijder alles</button>
       </div>
   </div>
 @else
