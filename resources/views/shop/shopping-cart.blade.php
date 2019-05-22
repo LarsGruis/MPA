@@ -104,7 +104,7 @@
   <a class="navbar-brand text-light" href="categories" style="font-size: 17px;">Webshop |</a>
   <a class="navbar-brand text-light justify-content-end" href="shares" style="font-size: 17px;">&nbsp;All products</a>
   <a href="{{ route('shares.shoppingCart') }}">
-      <span class="badge text-light" style="float: right;">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
+      <span class="badge text-light" style="float: right; font-size: 26px;">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
     <i class="fas fa-shopping-cart text-light" style="float: right; line-height: 35px; font-size: 30px;"></i>
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,7 +135,7 @@
   </div>
   <div class="row">
       <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="margin: 0 auto; padding-top: 18px;">
-          <strong>Total: {{ $totalPrice  }}</strong>
+          <strong>Totaal: €{{ $totalPrice  }}</strong>
       </div>
   </div>
   <hr>
