@@ -36,3 +36,6 @@ Route::get('/delete-cart', ['uses' => 'ShareController@deleteCart', 'as' => 'sha
 // Route::get('shares', [ 'as' => 'shares.deleteCart', 'uses' => 'ShareController@deleteCart']);
 // Route::get('/shopping-cart', 'ShareController@deleteCart')->name('deleteCart');
 // Route::get('user/profile', 'UserProfileController@show')->name('profile');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

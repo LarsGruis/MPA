@@ -5,6 +5,23 @@ use Session;
 
 class Cart
 {
+	// private $items;
+
+
+	// public function __construct()
+	// {
+	// 	$this->items = session('cart', []);
+	// }
+
+	// public function addItem($id)
+	// {
+	// 	if(array_key_exists($id, $this->items)) {
+
+	// 	} else {
+	// 		$this->items[$id] = ['name' => 'iphone x', 'amount' => 1, 'price' = 700];
+	// 	}
+	// }
+
 	public $items = null;
 	public $totalQty = 0;
 	public $totalPrice = 0;

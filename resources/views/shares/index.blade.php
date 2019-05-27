@@ -117,4 +117,3 @@
         @endforeach
 <div>
 @endsection
-<!--{{ url('shares?product_detail=' . $share->id)}}-->
