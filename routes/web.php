@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Auth::routes();
 Route::resource('test', 'TestController');
 Route::resource('students', 'StudentController');
 Route::resource('shares', 'ShareController');
@@ -31,11 +31,21 @@ Route::get('/shopping-cart', [
 	'as' => 'shares.shoppingCart'
 ]);
 
-Route::get('/delete-cart', ['uses' => 'ShareController@deleteCart', 'as' => 'shares.deleteCart']);
+// Route::get('shares.index', [
+// 	'uses' => 'ShareController@getCart', 
+// 	'as' => 'shares.shoppingCart'
+// ]);
+
+Route::get('/shopping-cart', 'ShareController@getCart');
+Route::get('/shopping-cart', 'ShareController@deleteCart');
+
+Auth::routes();
+
+//Route::get('/shares', 'HomeController@index')->name('home');
+// Route::get('/delete-cart', ['uses' => 'ShareController@deleteCart', 'as' => 'shares.deleteCart']);
 
 // Route::get('shares', [ 'as' => 'shares.deleteCart', 'uses' => 'ShareController@deleteCart']);
 // Route::get('/shopping-cart', 'ShareController@deleteCart')->name('deleteCart');
 // Route::get('user/profile', 'UserProfileController@show')->name('profile');
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

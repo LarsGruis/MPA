@@ -54,6 +54,6 @@ class Cart
 
 	public function delete()
 	{
-		Session::flush();
+		$request->session()->flush();
 	}
 }

@@ -75,6 +75,19 @@
     }
   }
 
+  .login {
+    color: white;
+    width: 10%;
+    float: right;
+    text-align: right;
+  }
+
+  .login a {
+    color: white;
+    line-height: 35px;
+    font-size: 17px;
+    text-decoration: none;
+  }
 
   /*ul {
     padding-left: 540px;
@@ -84,10 +97,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <a class="navbar-brand text-light" href="categories" style="font-size: 17px;">Webshop |</a>
   <a class="navbar-brand text-light justify-content-end" href="shares" style="font-size: 17px;">&nbsp;All products</a>
-  <a href="{{ route('shares.shoppingCart') }}">
-      <span class="badge text-light" style="float: right; font-size: 26px;">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
-    <i class="fas fa-shopping-cart text-light" style="float: right; line-height: 35px; font-size: 30px;"></i>
+  <a href="{{ url('shopping-cart') }}">
+    <span class="badge text-light" style="float: right; font-size: 19px;">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
+    <i class="fas fa-shopping-cart text-light" style="float: right; line-height: 35px; font-size: 19px;"></i>
   </a>
+  <div class="login">
+    <a href="http://test.local/login">Login&nbsp;</a>
+    <a href="http://test.local/register">Register&nbsp; |&nbsp;</a>
+  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
   </button>

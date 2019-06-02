@@ -103,7 +103,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <a class="navbar-brand text-light" href="categories" style="font-size: 17px;">Webshop |</a>
   <a class="navbar-brand text-light justify-content-end" href="shares" style="font-size: 17px;">&nbsp;All products</a>
-  <a href="{{ route('shares.shoppingCart') }}">
+  <a href="{{ url('shopping-cart') }}">
       <span class="badge text-light" style="float: right; font-size: 26px;">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
     <i class="fas fa-shopping-cart text-light" style="float: right; line-height: 35px; font-size: 30px;"></i>
   </a>
@@ -146,7 +146,7 @@
   </div>
     <div class="row">
       <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="margin: 0 auto;">
-          <button type="button" class="btn btn-danger" href="{{ route('shares.deleteCart') }}">Verwijder alles</button>
+          <a href="#" class="btn btn-danger">Verwijder alles</a>
       </div>
   </div>
 @else

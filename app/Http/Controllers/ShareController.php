@@ -171,10 +171,11 @@ class ShareController extends Controller
 
     public function deleteCart()
     {
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        $cart->delete();
-        return redirect('/shares');
+        $shares = Share::all();
+        // $oldCart = Session::get('cart');
+        // $cart = new Cart($oldCart);
+        // $cart->delete();
+        return view('shares.index');
     }
 
     // function upload(Request $request)
