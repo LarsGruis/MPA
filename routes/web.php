@@ -37,7 +37,9 @@ Route::get('/shopping-cart', [
 // ]);
 
 Route::get('/shopping-cart', 'ShareController@getCart');
-Route::get('/shopping-cart', 'ShareController@deleteCart');
+Route::get('/delete-cart', 'ShareController@deleteCart');
+Route::get('/delete-product', 'ShareController@deleteProduct');
+
 
 Auth::routes();
 

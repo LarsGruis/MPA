@@ -54,6 +54,11 @@ class Cart
 
 	public function delete()
 	{
-		$request->session()->flush();
+		session()->put('cart', null);
+	}
+
+	public function deleteOne($id)
+	{
+		session()->forget($id);
 	}
 }

@@ -57,9 +57,9 @@
   }
 
   .btn-primary {
-    width: 100%;
-    float: left;
-    margin-bottom: 20px;
+    width: 50%;
+    display: block;
+    margin: 0 auto;
   }
 
   .btn-success {
@@ -92,7 +92,13 @@
   }
 
   .list-group-item {
-      line-height: 35px;
+    line-height: 35px;
+  }
+
+  .fa-trash-alt {
+    float: right;
+    padding-right: 15px;
+    line-height: 35px;
   }
 
   /*ul {
@@ -122,12 +128,13 @@
                 <strong>{{ $share['item']['share_name'] }}</strong>
                 <span class="label label-success">€{{ $share['item']['share_price'] }}</span>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+                  <button type="button" class="btn btn-warning btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
                   <ul class="dropdown-menu">
                     <li><a href="#">Reduce by 1</a></li>
                     <li><a href="#">Reduce all</a></li>
                   </ul>
                 </div>
+                <a href="{{ url('delete-product?share=' . $share['item']['id']) }}"><i class="fas fa-trash-alt"></i></a>
               </li>
           @endforeach
         </ul>
@@ -146,14 +153,19 @@
   </div>
     <div class="row">
       <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="margin: 0 auto;">
-          <a href="#" class="btn btn-danger">Verwijder alles</a>
+          <a href="/delete-cart" class="btn btn-danger">Verwijder alles</a>
       </div>
   </div>
 @else
   <div class="row">
-      <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-         <h2>No items in Cart!</h2>
+      <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="margin: 0 auto; margin-top: 50px;">
+         <h2 style="text-align: center;">Uw winkelwagen is leeg.</h2>
       </div>
   </div>
+  <div class="row">
+      <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="margin: 0 auto; margin-top: 50px;">
+         <a href="shares" class="btn btn-primary">Terug naar producten</a>
+      </div>
+  </div>  
 @endif
 @endsection
