@@ -149,6 +149,14 @@ class ShareController extends Controller
 
     public function getAddToCart(Request $request, $id) 
     {
+        if (! $request->user) {
+            return redirect()->route('login');
+        }
+
+        // if ($request->user) {
+        //     return redirect()->route('shop.shopping-cart');
+        // }
+
         $share = Share::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
