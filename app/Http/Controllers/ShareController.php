@@ -154,7 +154,7 @@ class ShareController extends Controller
         }
 
         // if ($request->user) {
-        //     return redirect()->route('shop.shopping-cart');
+        //      return redirect()->route('shop.shopping-cart');
         // }
 
         $share = Share::find($id);
@@ -168,6 +168,10 @@ class ShareController extends Controller
 
     public function getCart(Request $request)
     {
+        // if (! $request->user) {
+        //     return redirect()->route('login');
+        // }
+
         if (!Session::has('cart'))
         {
             return view('shop.shopping-cart', ['shares' => null]);
@@ -179,6 +183,10 @@ class ShareController extends Controller
 
     public function deleteCart()
     {
+        // if (! $request->user) {
+        //     return redirect()->route('login');
+        // }
+
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $cart->delete();
@@ -187,6 +195,10 @@ class ShareController extends Controller
 
     public function deleteProduct(Request $request)
     {
+        if (! $request->user) {
+            return redirect()->route('login');
+        }
+
         $share = $request->get('share');
 
         $oldCart = Session::get('cart');
