@@ -59,6 +59,20 @@ class Cart
 
 	public function deleteOne($id)
 	{
-		session()->forget($id);
+		$this->items[$id]['qty']--;
+		$this->items[$id]['share_price'] -= $this->items[$id]['item']['share_price'];
+		$this->totalQty--;
+		$this->totalPrice -= $this->items[$id]['item']['share_price'];
+
+		if ($this->items[$id]['qty'] <= 0) {
+			unset($this->items[$id]);
+		}
+	}
+
+	public function removeProduct($id) 
+	{
+		$this->totalQty -= $this->items[$id]['qty'];
+		$this->totalPrice -= $this->items[$id]['share_price'];
+		unset($this->items[$id]);
 	}
 }

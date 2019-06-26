@@ -127,14 +127,8 @@
                 <span class="badge">{{ $share['qty'] }}</span>
                 <strong>{{ $share['item']['share_name'] }}</strong>
                 <span class="label label-success">€{{ $share['item']['share_price'] }}</span>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-warning btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Reduce by 1</a></li>
-                    <li><a href="#">Reduce all</a></li>
-                  </ul>
-                </div>
-                <a href="{{ url('delete-product?share=' . $share['item']['id']) }}"><i class="fas fa-trash-alt"></i></a>
+                <a href="{{ route('shares.deleteProduct', ['id' => $share['item']['id']]) }}">Reduce by 1</a>
+                <a href="{{ route('shares.getRemoveProduct', ['id' => $share['item']['id']]) }}"><i class="fa fa-trash-alt"></i></a>
               </li>
           @endforeach
         </ul>

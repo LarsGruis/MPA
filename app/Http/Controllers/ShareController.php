@@ -149,9 +149,9 @@ class ShareController extends Controller
 
     public function getAddToCart(Request $request, $id) 
     {
-        if (! $request->user) {
-            return redirect()->route('login');
-        }
+        // if (! $request->user) {
+        //     return redirect()->route('login');
+        // }
 
         // if ($request->user) {
         //      return redirect()->route('shop.shopping-cart');
@@ -193,19 +193,31 @@ class ShareController extends Controller
         return view('shop.shopping-cart', ['shares' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
-    public function deleteProduct(Request $request)
+    public function deleteProduct($id)
     {
-        if (! $request->user) {
-            return redirect()->route('login');
+
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->deleteOne($id);
+
+        Session::put('cart', $cart);
+        return redirect()->back();
+    }
+
+    public function getRemoveProduct($id) 
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeProduct($id);
+
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
         }
 
-        $share = $request->get('share');
-
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        $cart->deleteOne($share);
-
-        return view('shop.shopping-cart', ['shares' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+        Session::put('cart', $cart);
+        return redirect()->back();
     }
 
     // function upload(Request $request)

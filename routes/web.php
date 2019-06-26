@@ -16,19 +16,37 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::resource('test', 'TestController');
+
 Route::resource('students', 'StudentController');
+
 Route::resource('shares', 'ShareController');
+
 Route::resource('categories', 'CategoriesController');
+
 Route::view('/upload', "upload");
+
 Route::post('/store', "ShareController@store");
+
 Route::get('/share/{share}', [ 'as' => 'shares.getDetails', 'uses' => 'ShareController@getDetails']);
+
 Route::get('/add-to-cart/{id}', [
 	'uses' => 'ShareController@getAddToCart', 
 	'as' => 'shares.addToCart'
 ]);
+
+Route::get('/reduce/{id}', [
+	'uses' => 'ShareController@deleteProduct',
+	'as' => 'shares.deleteProduct'
+]);
+
 Route::get('/shopping-cart', [
 	'uses' => 'ShareController@getCart', 
 	'as' => 'shares.shoppingCart'
+]);
+
+Route::get('/remove/{id}', [
+	'uses' => 'ShareController@getRemoveProduct',
+	'as' => 'shares.getRemoveProduct'
 ]);
 
 // Route::get('shares.index', [
