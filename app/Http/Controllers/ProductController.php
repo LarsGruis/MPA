@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Share;
+use App\Product;
 use App\Categories;
 use Illuminate\Http\Request;
 use DB;
 use Session;
 use App\Cart;
 
-class ShareController extends Controller
+class productController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,12 +20,12 @@ class ShareController extends Controller
     {
         $id = $request->get('category');
 
-        $shares = Share::all();
+        $products = product::all();
         if ($id !== null) {
-            $shares = DB::table('shares')->where('category_id', $id)->get();
+            $products = DB::table('products')->where('category_id', $id)->get();
         }
 
-        return view('shares.index', ['shares' => $shares]);
+        return view('products.index', ['products' => $products]);
     }
 
     /**
@@ -35,7 +35,7 @@ class ShareController extends Controller
      */
     public function create()
     {
-        return view('shares.create');
+        return view('products.create');
     }
 
     /**
@@ -47,9 +47,9 @@ class ShareController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'share_name'=>'required',
-            'share_price'=> 'required|integer',
-            'share_qty' => 'required|integer',
+            'product_name'=>'required',
+            'product_price'=> 'required|integer',
+            'product_qty' => 'required|integer',
             'category_id' => 'required|integer',
             'product_photo' => 'required', 
             'product_detail' => 'required'
@@ -60,25 +60,25 @@ class ShareController extends Controller
 
         $image->move(public_path("images"), $new_name);
 
-        $share = new Share([
-            'share_name' => $request->get('share_name'),
-            'share_price'=> $request->get('share_price'),
-            'share_qty'=> $request->get('share_qty'),
+        $product = new product([
+            'product_name' => $request->get('product_name'),
+            'product_price'=> $request->get('product_price'),
+            'product_qty'=> $request->get('product_qty'),
             'category_id'=> $request->get('category_id'),
             'product_photo'=> $new_name, 
             'product_detail'=> $request->get('product_detail'),
         ]);
-        $share->save();
-        return redirect('/categories')->with('success', 'Product has been added');
+        $product->save();
+        return redirect('/categories')->with('success', 'product has been added');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Share  $share
+     * @param  \App\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Share $share)
+    public function show(product $product)
     {
         //
     }
@@ -86,65 +86,65 @@ class ShareController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Share  $share
+     * @param  \App\product  $product
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $share = Share::find($id);
+        $product = product::find($id);
 
-        return view('shares.edit', compact('share'));
+        return view('products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Share  $share
+     * @param  \App\product  $product
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'share_name'=>'required',
-            'share_price'=> 'required|integer',
+            'product_name'=>'required',
+            'product_price'=> 'required|integer',
             'category_id'=> 'required|integer',
-            'share_qty' => 'required|integer'
+            'product_qty' => 'required|integer'
         ]);
 
-        $share = Share::find($id);
-        $share->share_name = $request->get('share_name');
-        $share->share_price = $request->get('share_price');
-        $share->share_qty = $request->get('share_qty');
-        $share->category_id = $request->get('category_id');
-        $share->product_photo = $request->get('product_photo');
-        $share->save();
+        $product = product::find($id);
+        $product->product_name = $request->get('product_name');
+        $product->product_price = $request->get('product_price');
+        $product->product_qty = $request->get('product_qty');
+        $product->category_id = $request->get('category_id');
+        $product->product_photo = $request->get('product_photo');
+        $product->save();
 
-        return redirect('/shares')->with('success', 'Stock has been updated');
+        return redirect('/products')->with('success', 'Stock has been updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Share  $share
+     * @param  \App\product  $product
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-     $share = Share::find($id);
-     $share->delete();
+     $product = product::find($id);
+     $product->delete();
 
-     return redirect('/shares')->with('success', 'Stock has been deleted Successfully');
+     return redirect('/products')->with('success', 'Stock has been deleted Successfully');
     }
 
-    public function getDetails(Request $request, Share $share)
+    public function getDetails(Request $request, product $product)
     {
         $id = $request->get('product_detail');
 
-        // dd($share);
+        // dd($product);
        
 
-        return view('shares.detail', ['share' => $share]);
+        return view('products.detail', ['product' => $product]);
     } 
 
     public function getAddToCart(Request $request, $id) 
@@ -157,13 +157,13 @@ class ShareController extends Controller
         //      return redirect()->route('shop.shopping-cart');
         // }
 
-        $share = Share::find($id);
+        $product = product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        $cart->add($share, $share->id);
+        $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        return redirect()->route('shares.index');
+        return redirect()->route('products.index');
     }
 
     public function getCart(Request $request)
@@ -174,11 +174,11 @@ class ShareController extends Controller
 
         if (!Session::has('cart'))
         {
-            return view('shop.shopping-cart', ['shares' => null]);
+            return view('shop.shopping-cart', ['products' => null]);
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        return view('shop.shopping-cart', ['shares' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
     public function deleteCart()
@@ -190,34 +190,54 @@ class ShareController extends Controller
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $cart->delete();
-        return view('shop.shopping-cart', ['shares' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
-    public function deleteProduct($id)
+    public function deleteproduct($id)
     {
 
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->deleteOne($id);
 
-        Session::put('cart', $cart);
-        return redirect()->back();
-    }
-
-    public function getRemoveProduct($id) 
-    {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->removeProduct($id);
-
         if (count($cart->items) > 0) {
             Session::put('cart', $cart);
         } else {
-            Session::forget('cart');
+            $cart->delete();
         }
 
         Session::put('cart', $cart);
         return redirect()->back();
+    }
+
+    public function getRemoveproduct($id) 
+    {        
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeproduct($id);
+
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+            $cart->delete();
+        }
+
+        Session::put('cart', $cart);
+        return redirect()->back();
+    }
+
+    public function deleteCartAfterOrder()
+    {
+        // if (! $request->user) {
+        //     return redirect()->route('login');
+        // }
+        $products = product::all();
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->deleteAfterOrder();
+
+        session()->put('cart', null);
+        return view('products.index', ['products' => $products]);
     }
 
     // function upload(Request $request)

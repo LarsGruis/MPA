@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Share extends Model
+class Product extends Model
 {
   protected $fillable = [
-    'share_name',
-    'share_price',
-    'share_qty',
+    'product_name',
+    'product_price',
+    'product_qty',
     'category_id',
     'product_photo', 
     'product_detail'

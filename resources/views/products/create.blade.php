@@ -25,14 +25,14 @@
   }
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  <a class="navbar-brand text-light" href="shares">Webshop</a>
+  <a class="navbar-brand text-light" href="products">Webshop</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 </nav>
 <div class="card uper">
   <div class="card-header">
-    Edit Product
+    Add Product
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -44,30 +44,33 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('shares.update', $share->id) }}">
-        @method('PATCH')
-        @csrf
-        <div class="form-group">
-          <label for="name">Product Name:</label>
-          <input type="text" class="form-control" name="share_name" value={{ $share->share_name }} />
-        </div>
-        <div class="form-group">
-          <label for="price">Product Price :</label>
-          <input type="text" class="form-control" name="share_price" value={{ $share->share_price }} />
-        </div>
-        <div class="form-group">
-          <label for="quantity">Product Quantity:</label>
-          <input type="text" class="form-control" name="share_qty" value={{ $share->share_qty }} />
-        </div>
-        <div class="form-group">
+      <form method="post" enctype="multipart/form-data" action="{{ route('products.store') }}">
+          <div class="form-group">
+              @csrf
+              <label for="name">Product Name:</label>
+              <input type="text" class="form-control" name="product_name"/>
+          </div>
+          <div class="form-group">
+              <label for="price">Product Price :</label>
+              <input type="text" class="form-control" name="product_price"/>
+          </div>
+          <div class="form-group">
+              <label for="quantity">Product Quantity:</label>
+              <input type="text" class="form-control" name="product_qty"/>
+          </div>
+          <div class="form-group">
               <label for="quantity">Category id:</label>
-              <input type="number" class="form-control" name="category_id" value=value={{ $share->category_id }} />
-        </div>
-        <div class="form-group">
+              <input type="number" class="form-control" name="category_id"/>
+          </div>
+          <div class="form-group">
               <label for="photo">Product photo:</label>
               <input type="file" class="form-control" name="product_photo"/>
-        </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+          <div class="form-group">
+              <label for="quantity">Product Details:</label>
+              <input type="text" class="form-control" name="product_detail" />
+          </div>
+          <button type="submit" class="btn btn-primary">Add</button>
       </form>
   </div>
 </div>

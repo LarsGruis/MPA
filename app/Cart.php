@@ -38,7 +38,7 @@ class Cart
 
 	public function add($item, $id)
 	{
-		$storedItem = ['qty' => 0, 'share_price' => $item->share_price, 'item' => $item];
+		$storedItem = ['qty' => 0, 'product_price' => $item->product_price, 'item' => $item];
 		if ($this->items) {
 			if (array_key_exists($id, $this->items)) 
 			{
@@ -46,10 +46,10 @@ class Cart
 			}
 		}
 		$storedItem['qty']++;
-		$storedItem['share_price'] = $item->share_price * $storedItem['qty'];
+		$storedItem['product_price'] = $item->product_price * $storedItem['qty'];
 		$this->items[$id] = $storedItem;
 		$this->totalQty++;
-		$this->totalPrice += $item->share_price;
+		$this->totalPrice += $item->product_price;
 	}
 
 	public function delete()
@@ -60,9 +60,9 @@ class Cart
 	public function deleteOne($id)
 	{
 		$this->items[$id]['qty']--;
-		$this->items[$id]['share_price'] -= $this->items[$id]['item']['share_price'];
+		$this->items[$id]['product_price'] -= $this->items[$id]['item']['product_price'];
 		$this->totalQty--;
-		$this->totalPrice -= $this->items[$id]['item']['share_price'];
+		$this->totalPrice -= $this->items[$id]['item']['product_price'];
 
 		if ($this->items[$id]['qty'] <= 0) {
 			unset($this->items[$id]);
@@ -72,7 +72,12 @@ class Cart
 	public function removeProduct($id) 
 	{
 		$this->totalQty -= $this->items[$id]['qty'];
-		$this->totalPrice -= $this->items[$id]['share_price'];
+		$this->totalPrice -= $this->items[$id]['product_price'];
 		unset($this->items[$id]);
+	}
+
+	public function deleteAfterOrder()
+	{
+		session()->put('cart', null);
 	}
 }

@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Order::class, function (Faker $faker) {
+$factory->define(App\Payment::class, function (Faker $faker) {
     return [
         //
     ];

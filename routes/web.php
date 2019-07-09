@@ -19,53 +19,84 @@ Route::resource('test', 'TestController');
 
 Route::resource('students', 'StudentController');
 
-Route::resource('shares', 'ShareController');
+Route::resource('products', 'ProductController');
 
 Route::resource('categories', 'CategoriesController');
 
+Route::resource('orders', 'OrdersController');
+
 Route::view('/upload', "upload");
 
-Route::post('/store', "ShareController@store");
+Route::post('/store', "ProductController@store");
 
-Route::get('/share/{share}', [ 'as' => 'shares.getDetails', 'uses' => 'ShareController@getDetails']);
+Route::post('/store-order', "OrderController@store");
+
+Route::get('/product/{product}', [ 'as' => 'products.getDetails', 'uses' => 'ProductController@getDetails']);
 
 Route::get('/add-to-cart/{id}', [
-	'uses' => 'ShareController@getAddToCart', 
-	'as' => 'shares.addToCart'
+	'uses' => 'ProductController@getAddToCart', 
+	'as' => 'products.addToCart'
 ]);
 
 Route::get('/reduce/{id}', [
-	'uses' => 'ShareController@deleteProduct',
-	'as' => 'shares.deleteProduct'
+	'uses' => 'ProductController@deleteProduct',
+	'as' => 'products.deleteProduct'
 ]);
 
 Route::get('/shopping-cart', [
-	'uses' => 'ShareController@getCart', 
-	'as' => 'shares.shoppingCart'
+	'uses' => 'ProductController@getCart', 
+	'as' => 'products.shoppingCart'
 ]);
 
 Route::get('/remove/{id}', [
-	'uses' => 'ShareController@getRemoveProduct',
-	'as' => 'shares.getRemoveProduct'
+	'uses' => 'ProductController@getRemoveProduct',
+	'as' => 'products.getRemoveProduct'
 ]);
 
-// Route::get('shares.index', [
-// 	'uses' => 'ShareController@getCart', 
-// 	'as' => 'shares.shoppingCart'
+Route::get('/checkout', [
+	'uses' => 'OrdersController@getCheckout',
+	'as' => 'checkout' 
+]);
+
+Route::post('/checkout', [
+	'uses' => 'OrdersController@postCheckout',
+	'as' => 'checkout'
+]);
+
+Route::get('/orders', [
+	'uses' => 'OrdersController@index',
+	'as' => 'orders'
+]);
+
+Route::get('/deleteCartAfterOrder', [
+	'uses' => 'OrdersController@index',
+	'as' => 'orders'
+]);
+
+Route::get('/viewcart', 'CartController@getCart')->name('viewCart');
+
+Route::get('/delete-after-order', [
+	'uses' => 'ProductController@deleteCartAfterOrder',
+	'as' => 'products.deleteCartAfterOrder'
+]);
+
+// Route::get('products.index', [
+// 	'uses' => 'ProductController@getCart', 
+// 	'as' => 'products.shoppingCart'
 // ]);
 
-Route::get('/shopping-cart', 'ShareController@getCart');
-Route::get('/delete-cart', 'ShareController@deleteCart');
-Route::get('/delete-product', 'ShareController@deleteProduct');
+Route::get('/shopping-cart', 'ProductController@getCart');
+Route::get('/delete-cart', 'ProductController@deleteCart');
+Route::get('/delete-product', 'ProductController@deleteProduct');
 
 
 Auth::routes();
 
-//Route::get('/shares', 'HomeController@index')->name('home');
-// Route::get('/delete-cart', ['uses' => 'ShareController@deleteCart', 'as' => 'shares.deleteCart']);
+//Route::get('/products', 'HomeController@index')->name('home');
+// Route::get('/delete-cart', ['uses' => 'ProductController@deleteCart', 'as' => 'products.deleteCart']);
 
-// Route::get('shares', [ 'as' => 'shares.deleteCart', 'uses' => 'ShareController@deleteCart']);
-// Route::get('/shopping-cart', 'ShareController@deleteCart')->name('deleteCart');
+// Route::get('products', [ 'as' => 'products.deleteCart', 'uses' => 'ProductController@deleteCart']);
+// Route::get('/shopping-cart', 'ProductController@deleteCart')->name('deleteCart');
 // Route::get('user/profile', 'UserProfileController@show')->name('profile');
 
 //Route::get('/home', 'HomeController@index')->name('home');

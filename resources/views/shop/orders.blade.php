@@ -119,27 +119,9 @@
 </nav>
 
 @if(Session::has('cart'))
-
-
-
-  <div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="margin: 0 auto; margin-top: 25px;">
-        <ul class="list-group">
-          @foreach($products as $product)
-              <li class="list-group-item">
-                <span class="badge">{{ $product['qty'] }}</span>
-                <strong>{{ $product['item']['product_name'] }}</strong>
-                <span class="label label-success">€{{ $product['item']['product_price'] }}</span>
-                <a href="{{ route('products.deleteProduct', ['id' => $product['item']['id']]) }}">Reduce by 1</a>
-                <a href="{{ route('products.getRemoveProduct', ['id' => $product['item']['id']]) }}"><i class="fa fa-trash-alt"></i></a>
-              </li>
-          @endforeach
-        </ul>
-    </div>
-  </div>
   <div class="row">
       <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="margin: 0 auto; padding-top: 18px;">
-          <strong>Totaal: €{{ $totalPrice  }}</strong>
+          <strong>Totaal: €</strong>
       </div>
   </div>
   <hr>
@@ -161,7 +143,7 @@
   </div>
   <div class="row">
       <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="margin: 0 auto; margin-top: 50px;">
-         <a href="products" class="btn btn-primary">Terug naar producten</a>
+         <a href="shares" class="btn btn-primary">Terug naar producten</a>
       </div>
   </div>  
 @endif

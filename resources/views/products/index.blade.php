@@ -96,7 +96,7 @@
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <a class="navbar-brand text-light" href="categories" style="font-size: 17px;">Webshop |</a>
-  <a class="navbar-brand text-light justify-content-end" href="shares" style="font-size: 17px;">&nbsp;All products</a>
+  <a class="navbar-brand text-light justify-content-end" href="products" style="font-size: 17px;">&nbsp;All products</a>
   <a href="{{ url('shopping-cart') }}">
     <span class="badge text-light" style="float: right; font-size: 19px;">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
     <i class="fas fa-shopping-cart text-light" style="float: right; line-height: 35px; font-size: 19px;"></i>
@@ -115,16 +115,16 @@
       {{ session()->get('success') }}  
     </div><br />
   @endif
-        <a href="{{ route('shares.create')}}" class="btn btn-success" style="margin-bottom: 40px; width: 100%">Create</a>
-        @foreach($shares as $share)
+        <a href="{{ route('products.create')}}" class="btn btn-success" style="margin-bottom: 40px; width: 100%">Create</a>
+        @foreach($products as $product)
         <div class="card">
-          <img src="{{asset('images/'.$share->product_photo)}}" class="card-img-top" alt="...">
+          <img src="{{asset('images/'.$product->product_photo)}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">{{$share->share_name}}</h5>
-              <p class="card-text">€{{$share->share_price}}</p>
-              <a href="{{ route('shares.addToCart', ['id' => $share->id]) }}" class="btn btn-success" role="button">Add to cart</a>
-              <a href="/share/{{$share->id}}" class="btn btn-primary">Details</a>
-              <!--<form action="{{ route('shares.destroy', $share->id) }}" method="post" style="display: inline;">
+              <h5 class="card-title">{{$product->product_name}}</h5>
+              <p class="card-text">€{{$product->product_price}}</p>
+              <a href="{{ route('products.addToCart', ['id' => $product->id]) }}" class="btn btn-success" role="button">Add to cart</a>
+              <a href="/product/{{$product->id}}" class="btn btn-primary">Details</a>
+              <!--<form action="{{ route('products.destroy', $product->id) }}" method="post" style="display: inline;">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit" style="float: right;">Delete</button>
